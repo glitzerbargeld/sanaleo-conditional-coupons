@@ -38,6 +38,8 @@ function create_conditional_coupon($order_id) {
         $product_id = $item->get_product_id();
         $p = new WC_Product($product_id);
         $menge = $p->get_attribute('menge');
+        $product_variation_id = $item->get_variation_id();
+
 
         write_log($menge);
 
@@ -45,7 +47,7 @@ function create_conditional_coupon($order_id) {
 
             //$coupon_code = 'WP_TESTCODE_BLUETEN'; 
             $coupon = array(
-                'post_title' => $menge,
+                'post_title' => $product_variation_id,
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_author' => 1,
