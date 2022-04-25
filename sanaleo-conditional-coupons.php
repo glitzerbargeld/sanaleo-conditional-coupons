@@ -62,6 +62,7 @@ function create_conditional_coupon($order_id) {
     if($has_10g) {
 
         $coupon_name = $menge . '-' . random_str_generator (4) . $first_name[0] . $last_name[1];
+        echo '<pre>'; var_dump($coupon_name); echo '</pre>';
         $coupon = array(
             'post_title' => $coupon_name,
             'post_content' => '',
