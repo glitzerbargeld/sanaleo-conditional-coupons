@@ -23,8 +23,10 @@ function create_conditional_coupon($order_id) {
 
     foreach ( $items as $item ) {      
         $product_id = $item->get_product_id();
+        $product_variation = wc_get_product( $variation['variation_id'] ); 
+        $menge = $product_variation->get_attribute( 'menge' );
 
-        if ( has_term( 'cbd-blueten', 'product_cat', $product_id )) {
+        if ( has_term( 'cbd-blueten', 'product_cat', $product_id ) && $menge == "10g") {
 
             $coupon_code = 'WP_TESTCODE_BLUETEN'; 
             $coupon = array(
