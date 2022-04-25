@@ -37,6 +37,7 @@ function create_conditional_coupon($order_id) {
                 'post_status' => 'publish',
                 'post_author' => 1,
                 'post_type' => 'shop_coupon');
+                
             $new_coupon_id = wp_insert_post( $coupon );
 
             update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
