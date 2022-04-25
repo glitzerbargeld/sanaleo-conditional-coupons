@@ -21,12 +21,10 @@ if (!function_exists('write_log')) {
 function random_str_generator ($len_of_gen_str){
     $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     $var_size = strlen($chars);
-    echo "Random string ="; 
     for( $x = 0; $x < $len_of_gen_str; $x++ ) {  
         $random_str= $chars[ rand( 0, $var_size - 1 ) ];  
-        echo $random_str;  
     }
-echo "\n";
+    return $random_str;
 }
 
 
