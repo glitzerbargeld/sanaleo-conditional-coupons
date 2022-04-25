@@ -47,7 +47,6 @@ function create_conditional_coupon($order_id) {
     foreach ( $items as $item ) {
 
         $product_id = $item->get_product_id();
-        $meta_data = $item->get_formatted_meta_data('_', true);
         $menge = $item->get_meta('pa_menge');
         $has_10g = FALSE;        
 
@@ -62,8 +61,6 @@ function create_conditional_coupon($order_id) {
 
         $rand_str = random_str_generator(8); 
         $coupon_name = $menge . '-' . $rand_str . '-' . $first_name[0] . $last_name[0];
-        echo '<pre>'; var_dump($rand_str); echo '</pre>';
-        echo '<pre>'; var_dump($coupon_name); echo '</pre>';
         $coupon = array(
             'post_title' => $coupon_name,
             'post_content' => '',
@@ -82,6 +79,10 @@ function create_conditional_coupon($order_id) {
         update_post_meta( $new_coupon_id, 'expiry_date', '' );
         update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
         update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
+
+        $to = 'peter.griffen@example.com';
+        $subject = 'Dein Gutschein für 10g CBD Blüten';
+        wp_mail( $to, $subject, $coupon_name );
 
     }
 }
