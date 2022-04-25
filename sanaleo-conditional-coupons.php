@@ -18,6 +18,17 @@ if (!function_exists('write_log')) {
     }
 }
 
+function random_str_generator ($len_of_gen_str){
+    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    $var_size = strlen($chars);
+    echo "Random string ="; 
+    for( $x = 0; $x < $len_of_gen_str; $x++ ) {  
+        $random_str= $chars[ rand( 0, $var_size - 1 ) ];  
+        echo $random_str;  
+    }
+echo "\n";
+}
+
 
 
 function create_conditional_coupon($order_id) {
@@ -34,35 +45,42 @@ function create_conditional_coupon($order_id) {
 
     $items = $order->get_items();
 
-    foreach ( $items as $item ) {      
+    foreach ( $items as $item ) {
+
         $product_id = $item->get_product_id();
         $meta_data = $item->get_formatted_meta_data('_', true);
-        $menge = $item->get_meta('pa_menge');        
-        echo var_dump($menge);
+        $menge = $item->get_meta('pa_menge');
+        $has_10g = FALSE;        
 
-        if ( has_term( 'cbd-blueten', 'product_cat', $product_id )) {
+        if ( has_term( 'cbd-blueten', 'product_cat', $product_id ) && $menge = "10g") {
 
-            //$coupon_code = 'WP_TESTCODE_BLUETEN'; 
-            $coupon = array(
-                'post_title' => $menge,
-                'post_content' => '',
-                'post_status' => 'publish',
-                'post_author' => 1,
-                'post_type' => 'shop_coupon');
-                
-            $new_coupon_id = wp_insert_post( $coupon );
+            $has_10g = TRUE; 
+     
+        }
+    }
 
-            update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
-            update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
-            update_post_meta( $new_coupon_id, 'individual_use', 'no' );
-            update_post_meta( $new_coupon_id, 'product_ids', '' );
-            update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
-            update_post_meta( $new_coupon_id, 'usage_limit', '' );
-            update_post_meta( $new_coupon_id, 'expiry_date', '' );
-            update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
-            update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
+    if($has_10g) {
 
-        }   
+        $coupon_name = $menge . '-' . random_str_generator (4) . $first_name[0] . $last_name[1];
+        $coupon = array(
+            'post_title' => $coupon_name,
+            'post_content' => '',
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_type' => 'shop_coupon');
+            
+        $new_coupon_id = wp_insert_post( $coupon );
+
+        update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
+        update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
+        update_post_meta( $new_coupon_id, 'individual_use', 'no' );
+        update_post_meta( $new_coupon_id, 'product_ids', '' );
+        update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
+        update_post_meta( $new_coupon_id, 'usage_limit', '' );
+        update_post_meta( $new_coupon_id, 'expiry_date', '' );
+        update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
+        update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
+
     }
 }
 
