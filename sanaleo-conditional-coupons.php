@@ -24,16 +24,20 @@ function create_conditional_coupon($order_id) {
     foreach ( $items as $item ) {      
         $product_id = $item->get_product_id();
 
+        if($item->has_weight()){
+            $product_weight = $item->get_weight();
+        } 
+
         if ( has_term( 'cbd-blueten', 'product_cat', $product_id )) {
 
             $coupon_code = 'WP_TESTCODE_BLUETEN'; // Code
             $coupon = array(
-                'post_title' => $coupon_code,
+                'post_title' => $product_weight,
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_author' => 1,
                 'post_type' => 'shop_coupon');
-
+                
             $new_coupon_id = wp_insert_post( $coupon );
 
             update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
