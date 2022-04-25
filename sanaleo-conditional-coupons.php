@@ -37,6 +37,7 @@ function create_conditional_coupon($order_id) {
     foreach ( $items as $item ) {      
         $product_id = $item->get_product_id();
         $prod_meta_data = $item->get_formatted_meta_data();
+        $menge = $item->get_meta('menge');
 
         echo '<pre>'; var_dump($prod_meta_data); echo '</pre>';
 
@@ -44,7 +45,7 @@ function create_conditional_coupon($order_id) {
 
             //$coupon_code = 'WP_TESTCODE_BLUETEN'; 
             $coupon = array(
-                'post_title' => 'meta3',
+                'post_title' => $menge,
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_author' => 1,
