@@ -23,7 +23,8 @@ function create_conditional_coupon($order_id) {
 
     foreach ( $items as $item ) {      
         $product_id = $item->get_product_id();
-        $menge = $item->get_attribute('menge');
+        $p = new WC_Product($product_id);
+        $menge = $p->get_attribute('menge');
 
         if ( has_term( 'cbd-blueten', 'product_cat', $product_id ) && $menge == "10g") {
 
