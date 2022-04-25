@@ -66,7 +66,6 @@ function create_conditional_coupon($order_id) {
     }
 }
 
-
 add_action( 'woocommerce_order_status_completed', 'create_conditional_coupon', 10, 1);
 
 
