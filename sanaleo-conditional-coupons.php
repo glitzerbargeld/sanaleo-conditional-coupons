@@ -21,8 +21,9 @@ if (!function_exists('write_log')) {
 function random_str_generator ($len_of_gen_str){
     $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     $var_size = strlen($chars);
+    $random_str = '';
     for( $x = 0; $x < $len_of_gen_str; $x++ ) {  
-        $random_str= $chars[ rand( 0, $var_size - 1 ) ];  
+        $random_str= $random_str . $chars[ rand( 0, $var_size - 1 ) ];  
     }
     return $random_str;
 }
