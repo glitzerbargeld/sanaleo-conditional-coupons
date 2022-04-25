@@ -43,7 +43,7 @@ function create_conditional_coupon($order_id) {
             //$coupon_code = 'WP_TESTCODE_BLUETEN'; 
             $coupon = array(
                 'post_title' => 'meta2',
-                'post_content' => $prod_meta_data,
+                'post_content' => '',
                 'post_status' => 'publish',
                 'post_author' => 1,
                 'post_type' => 'shop_coupon');
