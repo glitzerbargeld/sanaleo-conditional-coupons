@@ -38,13 +38,13 @@ function create_conditional_coupon($order_id) {
         $product_id = $item->get_product_id();
         $meta_data = $item->get_formatted_meta_data('_', true);
         $menge = $item->get_meta('pa_menge');        
-        echo '<pre>'; var_dump($menge); echo '</pre>';
+        echo var_dump($menge);
 
         if ( has_term( 'cbd-blueten', 'product_cat', $product_id )) {
 
             //$coupon_code = 'WP_TESTCODE_BLUETEN'; 
             $coupon = array(
-                'post_title' => 'test_coupon',
+                'post_title' => $menge,
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_author' => 1,
