@@ -5,6 +5,19 @@
  * Description: Adds Coupons based on Customers Purchases
  */
 
+if (!function_exists('write_log')) {
+
+    function write_log($log) {
+        if (true === WP_DEBUG) {
+            if (is_array($log) || is_object($log)) {
+                error_log(print_r($log, true));
+            } else {
+                error_log($log);
+            }
+        }
+    }
+}
+
 
 
 function create_conditional_coupon($order_id) {
@@ -25,6 +38,8 @@ function create_conditional_coupon($order_id) {
         $product_id = $item->get_product_id();
         $p = new WC_Product($product_id);
         $menge = $p->get_attribute('menge');
+
+        write_log($menge);
 
         if ( has_term( 'cbd-blueten', 'product_cat', $product_id ) && $menge == "10g") {
 
