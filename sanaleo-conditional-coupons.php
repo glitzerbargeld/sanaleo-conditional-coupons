@@ -28,9 +28,9 @@ function create_conditional_coupon($order_id) {
 
         if ( has_term( 'cbd-blueten', 'product_cat', $product_id ) && $menge == "10g") {
 
-            $coupon_code = 'WP_TESTCODE_BLUETEN'; 
+            //$coupon_code = 'WP_TESTCODE_BLUETEN'; 
             $coupon = array(
-                'post_title' => $coupon_code,
+                'post_title' => $menge,
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_author' => 1,
