@@ -23,11 +23,14 @@ function create_conditional_coupon($order_id) {
 
     foreach ( $items as $item ) {      
         $product_id = $item->get_product_id();
-        $product_weight = $item->get_weight();
-       
+
+        if($item->has_weight()){
+            $product_weight = $item->get_weight();
+        } 
+
         if ( has_term( 'cbd-blueten', 'product_cat', $product_id )) {
 
-            $coupon_code = 'WP_TESTCODE_BLUETEN'; // Code
+            // $coupon_code = 'WP_TESTCODE_BLUETEN'; 
             $coupon = array(
                 'post_title' => $product_weight,
                 'post_content' => '',
