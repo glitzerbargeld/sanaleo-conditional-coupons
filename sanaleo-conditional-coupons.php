@@ -38,8 +38,6 @@ function create_conditional_coupon($order_id) {
         $product_id = $item->get_product_id();
         $meta_data = $item->get_formatted_meta_data('_', true);
         $menge = $item->get_meta('pa_menge');        
-
-        echo '<pre>'; var_dump($meta_data); echo '</pre>';
         echo '<pre>'; var_dump($menge); echo '</pre>';
 
         if ( has_term( 'cbd-blueten', 'product_cat', $product_id )) {
