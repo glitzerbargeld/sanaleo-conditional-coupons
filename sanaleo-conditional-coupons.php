@@ -19,7 +19,7 @@ if (!function_exists('write_log')) {
 }
 
 function random_str_generator ($len_of_gen_str){
-    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $var_size = strlen($chars);
     $random_str = '';
     for( $x = 0; $x < $len_of_gen_str; $x++ ) {  
@@ -60,9 +60,9 @@ function create_conditional_coupon($order_id) {
 
     if($has_10g) {
 
-        $random_string = random_str_generator(8); 
-        $coupon_name = $menge . '-' . $first_name[0] . $last_name[0];
-        echo '<pre>'; var_dump($random_string); echo '</pre>';
+        $rand_str = random_str_generator(8); 
+        $coupon_name = $menge . '-' . $rand_str . '-' . $first_name[0] . $last_name[0];
+        echo '<pre>'; var_dump($rand_str); echo '</pre>';
         echo '<pre>'; var_dump($coupon_name); echo '</pre>';
         $coupon = array(
             'post_title' => $coupon_name,
