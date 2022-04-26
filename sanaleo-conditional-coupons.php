@@ -47,6 +47,20 @@ function run_mc($mailadress){
 }
 
 
+function run_message($message)
+{
+    try {
+        $mailchimp = new MailchimpTransactional\ApiClient();
+        $mailchimp->setApiKey('YOUR_API_KEY');
+
+        $response = $mailchimp->messages->send(["message" => $message]);
+        print_r($response);
+    } catch (Error $e) {
+        echo 'Error: ', $e->getMessage(), "\n";
+    }
+}
+
+
 
 
 function create_conditional_coupon($order_id) {
@@ -102,7 +116,20 @@ function create_conditional_coupon($order_id) {
         $to = $customer_email;
         $subject = 'Dein Gutschein für 10g CBD Blüten';
         wp_mail( $to, $subject, $coupon_name );
-        run_mc($customer_email);
+        
+        $message = [
+            "from_email" => "info@sanaleo.com",
+            "subject" => "Hello world",
+            "text" => "Welcome to Mailchimp Transactional!",
+            "to" => [
+                [
+                    "email" => "torben@sanaleo.com",
+                    "type" => "to"
+                ]
+            ]
+        ];
+        
+        run_message($message);
 
 
     }
