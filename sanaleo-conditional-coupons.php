@@ -38,6 +38,7 @@ function run_mc(){
     $mailchimp->setApiKey('j6ZwO6da1H1a8OfzqLJB2w');
     $response = $mailchimp->users->ping();
     print_r($response);
+    var_dump($response);
   } catch (Error $e) {
         echo 'Error: ',  $e->getMessage(), "\n";
   }
