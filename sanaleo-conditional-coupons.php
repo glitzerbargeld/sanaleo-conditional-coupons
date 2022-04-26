@@ -29,8 +29,8 @@ function random_str_generator ($len_of_gen_str){
 }
 
 
-$dir = plugin_dir_path( __FILE__ );
-require_once($dir . 'vendor/autoload.php');
+$dir = plugin_dir_path( __DIR__ );
+require_once($dir . '/vendor/autoload.php');
 
 function run_mc(){
  try {
