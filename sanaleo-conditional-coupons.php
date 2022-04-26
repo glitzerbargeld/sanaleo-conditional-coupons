@@ -28,6 +28,19 @@ function random_str_generator ($len_of_gen_str){
     return $random_str;
 }
 
+require_once('vendor/autoload.php');
+
+function run_mc(){
+ try {
+    $mailchimp = new MailchimpTransactional\ApiClient();
+    $mailchimp->setApiKey('j6ZwO6da1H1a8OfzqLJB2w');
+    $response = $mailchimp->users->ping();
+    print_r($response);
+  } catch (Error $e) {
+        echo 'Error: ',  $e->getMessage(), "\n";
+  }
+}
+
 
 
 function create_conditional_coupon($order_id) {
@@ -83,6 +96,8 @@ function create_conditional_coupon($order_id) {
         $to = $customer_email;
         $subject = 'Dein Gutschein für 10g CBD Blüten';
         wp_mail( $to, $subject, $coupon_name );
+        run_mc();
+
 
     }
 }
