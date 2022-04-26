@@ -28,6 +28,7 @@ function random_str_generator ($len_of_gen_str){
     return $random_str;
 }
 
+/*
 $dir = plugin_dir_path( __FILE__ );
 require_once($dir . 'vendor/autoload.php');
 
@@ -42,6 +43,7 @@ function run_mc(){
   }
 }
 
+*/
 
 
 function create_conditional_coupon($order_id) {
