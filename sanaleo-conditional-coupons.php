@@ -120,6 +120,7 @@ function create_conditional_coupon($order_id) {
         update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
 
         $to = $customer_email;
+        date_default_timezone_set("Europe/Berlin");
         $two_minutes = time() + 120;
         $two_minutes_converted = date("Y-m-d H:m:s", $two_minutes);
         $template = "rm-cs-bl-ten10gr";
