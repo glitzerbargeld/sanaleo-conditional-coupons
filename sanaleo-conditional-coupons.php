@@ -57,7 +57,7 @@ function run_message($message, $template_name, $discount_code, $date)
             "template_name" => $template_name,
             "message" => $message,
             "send_at" => $date,
-            "template_content" => [["discount_code" => $discount_code,]],
+            "template_content" => [["name" => "discountcode", "content" => $discount_code]],
         ]);
 
         print_r($response);
@@ -120,10 +120,11 @@ function create_conditional_coupon($order_id) {
         update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
 
         $to = $customer_email;
-        $two_minutes = time() + 120;
-        $two_minutes_converted = date("Y-m-d H:i:s", $two_minutes);
+        $two_months = time() + 60;
+        //(60*60*24*60);
+        $two_months_converted = date("Y-m-d H:i:s", $two_months);
         $template = "rm-cs-bl-ten10gr";
-        $subject = 'Dein Gutschein für 10g CBD Blüten ' . $two_minutes_converted;
+        $subject = 'Dein Gutschein für 10g CBD Blüten ' . $two_months_converted;
         wp_mail( $to, $subject, $coupon_name );
         
         $message = [
@@ -137,7 +138,7 @@ function create_conditional_coupon($order_id) {
             ]
         ];
 
-        run_message($message, $template, $coupon_name, $two_minutes_converted);
+        run_message($message, $template, $coupon_name, $two_months_converted);
     }
 }
 
