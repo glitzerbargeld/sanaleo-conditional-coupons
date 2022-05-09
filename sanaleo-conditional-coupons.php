@@ -121,7 +121,7 @@ function create_conditional_coupon($order_id) {
 
         $to = $customer_email;
         date_default_timezone_set("Europe/Berlin");
-        $two_minutes = time() + 120;
+        $two_minutes = time();
         $two_minutes_converted = date("Y-m-d H:m:s", $two_minutes);
         $template = "rm-cs-bl-ten10gr";
         $subject = 'Dein Gutschein für 10g CBD Blüten ' . $two_minutes_converted;
