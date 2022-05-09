@@ -50,6 +50,8 @@ function run_mc($mailadress){
 function run_message($message, $template_name, $discount_code, $date)
 {
     try {
+
+        $date_converted = date("Y-m-d")
         $mailchimp = new MailchimpTransactional\ApiClient();
         $mailchimp->setApiKey('j6ZwO6da1H1a8OfzqLJB2w');
 
@@ -121,8 +123,9 @@ function create_conditional_coupon($order_id) {
 
         $to = $customer_email;
         $two_minutes = time() + 120;
+        $two_minutes_converted = ("Y-m-d H:m:s");
         $template = "rm-cs-bl-ten10gr";
-        $subject = 'Dein Gutschein für 10g CBD Blüten' . $two_minutes;
+        $subject = 'Dein Gutschein für 10g CBD Blüten ' . $two_minutes_converted;
         wp_mail( $to, $subject, $coupon_name );
         
         $message = [
@@ -136,7 +139,7 @@ function create_conditional_coupon($order_id) {
             ]
         ];
 
-        run_message($message, $template, $coupon_name, $two_minutes);
+        run_message($message, $template, $coupon_name, $two_minutes_converted);
     }
 }
 
