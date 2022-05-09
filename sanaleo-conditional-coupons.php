@@ -50,8 +50,6 @@ function run_mc($mailadress){
 function run_message($message, $template_name, $discount_code, $date)
 {
     try {
-
-        $date_converted = date("Y-m-d")
         $mailchimp = new MailchimpTransactional\ApiClient();
         $mailchimp->setApiKey('j6ZwO6da1H1a8OfzqLJB2w');
 
