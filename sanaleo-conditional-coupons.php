@@ -47,13 +47,19 @@ function run_mc($mailadress){
 }
 
 
-function run_message($message)
+function run_message($message, $template_name, $discount_code, $date)
 {
     try {
         $mailchimp = new MailchimpTransactional\ApiClient();
-        $mailchimp->setApiKey('YOUR_API_KEY');
+        $mailchimp->setApiKey('j6ZwO6da1H1a8OfzqLJB2w');
 
-        $response = $mailchimp->messages->send(["message" => $message]);
+        $response = $mailchimp->messages->sendTemplate([
+            "template_name" => $template_name,
+            "message" => $message,
+            "send_at" => $date,
+            "template_content" => [["discount_code" => $discount_code,]],
+        ]);
+
         print_r($response);
     } catch (Error $e) {
         echo 'Error: ', $e->getMessage(), "\n";
@@ -120,7 +126,6 @@ function create_conditional_coupon($order_id) {
         $message = [
             "from_email" => "info@sanaleo.com",
             "subject" => "Hello world",
-            "text" => "Welcome to Mailchimp Transactional!",
             "to" => [
                 [
                     "email" => "torben@sanaleo.com",
@@ -128,10 +133,11 @@ function create_conditional_coupon($order_id) {
                 ]
             ]
         ];
-        
-        run_message($message);
 
+        $date = time() + (60 * 24 * 60 * 60);
+        $template = "rm-cs-bl-ten10gr";
 
+        run_message($message, $template, $coupon_name, $date);
     }
 }
 
