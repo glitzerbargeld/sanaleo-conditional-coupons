@@ -56,6 +56,7 @@ function run_message($message, $template_name, $discount_code, $date)
         $response = $mailchimp->messages->sendTemplate([
             "template_name" => $template_name,
             "message" => $message,
+            "send_at" => $date,
             "template_content" => [["discount_code" => $discount_code,]],
         ]);
 
