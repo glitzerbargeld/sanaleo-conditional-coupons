@@ -47,7 +47,7 @@ function run_mc($mailadress){
 }
 
 
-function run_message($message, $template_name, $discount_code)
+function run_message($message, $template_name, $discount_code, $date)
 {
     try {
         $mailchimp = new MailchimpTransactional\ApiClient();
@@ -56,6 +56,7 @@ function run_message($message, $template_name, $discount_code)
         $response = $mailchimp->messages->sendTemplate([
             "template_name" => $template_name,
             "message" => $message,
+            "send_at" => $date,
             "template_content" => [["discount_code" => $discount_code,]],
         ]);
 
@@ -133,10 +134,10 @@ function create_conditional_coupon($order_id) {
             ]
         ];
 
-        $date = time() + (60 * 24 * 60 * 60);
+        $date = time() + 120;
         $template = "rm-cs-bl-ten10gr";
 
-        run_message($message, $template, $coupon_name);
+        run_message($message, $template, $coupon_name, $date);
     }
 }
 
